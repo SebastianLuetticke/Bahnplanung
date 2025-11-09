@@ -1,0 +1,81 @@
+<mujoco>
+
+    <option timestep="0.01" gravity="0 0 -9.81"/>
+
+    <visual>
+        <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+        <rgba haze="0.15 0.25 0.35 1" />
+        <global azimuth="-130" elevation="-60" />
+    </visual>
+
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512"
+            height="3072" />
+        <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+            rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+        <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5"
+            reflectance="0.2" />
+        <model name="conv_belt_asset" file="models/conveyor.xml" />
+        <model name="sausage_asset" file="models/sausage.xml" />
+        <model name="robot_asset" file="models/UR5gripper_v3.xml" />
+    </asset>
+
+
+    <worldbody>
+        <light pos="0 0 1.5" dir="0 0 -1" directional="true" />
+        <geom name="floor" size="0 0 0.05" type="plane" material="groundplane" />
+    </worldbody>
+
+    <!-- robot -->
+    <worldbody>
+        <body pos="0 0 0">
+            <attach model="robot_asset" body="box_link" prefix="free_" />
+        </body>
+    </worldbody>
+
+    <!-- conveyors -->
+    <worldbody>
+        <body pos="-0.65 0 0" euler="0 0 90">
+            <attach model="conv_belt_asset" body="conveyor" prefix="down_" />
+        </body>
+    </worldbody>
+
+    <worldbody>
+        <body pos="0.65 0 0" euler="0 0 90">
+            <attach model="conv_belt_asset" body="conveyor" prefix="up_" />
+        </body>
+    </worldbody>
+
+    <!-- sausages -->
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="0_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="1_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="2_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="3_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="4_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="5_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="6_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="7_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="8_" />
+    </worldbody>
+    <worldbody>
+        <attach model="sausage_asset" body="sausage" prefix="9_" />
+    </worldbody>
+
+</mujoco>

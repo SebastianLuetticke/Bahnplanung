@@ -1,0 +1,12 @@
+<mujoco model="sausage">
+    <worldbody>
+        <body name="sausage" pos="-5 0 0" euler="0 -90 0">
+            <geom name="sausage_geom" type="capsule" size="0.015 0.06" rgba="0.859 0.443 0.573 1" solref="0.002 1" friction="0.2 0.01 0.002" mass="0.1" contype="2" conaffinity="1"/>
+            <joint name="sausage_joint" type="free" damping="0.2"/>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <velocity name="sausage_vel" joint="sausage_joint" gear="0 1 0 0 0 0" ctrlrange="-20 20"/>
+    </actuator>
+</mujoco>

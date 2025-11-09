@@ -1,0 +1,45 @@
+<mujoco>
+    <worldbody>
+        <body name="floor">
+            <geom type="plane" size="2 2 0.01" />
+        </body>
+    </worldbody>
+
+    <worldbody>
+        <body name="conveyor">
+            <body name="roller1" euler="90 0 0" pos="1.05 0 0.1" >
+                <geom type="cylinder" size="0.05 0.2" rgba="0 0 1 1" />
+                <joint name="roller1_joint" type="hinge" damping="0.01" />
+                <geom type="box" size="0.04 0.04 0.001" pos="0 0 -0.201" />
+                <geom type="box" size="0.04 0.04 0.001" pos="0 0 0.201" />
+                <site name="roller1_site" type="sphere" rgba="1 0 0 1" size="0.01" pos="0 0.05 0" />
+            </body>
+
+            <body name="roller2" euler="90 0 0" pos="-1.05 0 0.1" >
+                <geom type="cylinder" size="0.05 0.2" rgba="0 0 1 1" />
+                <joint name="roller2_joint" type="hinge" damping="0.01" />
+                <geom type="box" size="0.04 0.04 0.001" pos="0 0 -0.201" />
+                <geom type="box" size="0.04 0.04 0.001" pos="0 0 0.201" />
+            </body>
+
+            <body name="belt" pos="0 0 0.17" >
+                <geom name="belt_geom" type="box" size="1.2 0.2 0.01" rgba="0 0 0 1" friction="0.2 0.005 0.0001" />
+            </body>
+        </body>
+
+    </worldbody>
+
+    <!-- The velocity of the two rollers should be the same. -->
+    <equality>
+        <joint joint1="roller1_joint" joint2="roller2_joint" />
+    </equality>
+
+    <actuator>
+        <velocity name="roller_vel" joint="roller1_joint" ctrlrange="-100 100" />
+    </actuator>
+
+    <sensor>
+        <velocimeter name="conv_velocimeter" site="roller1_site" />
+    </sensor>
+
+</mujoco>
