@@ -1,0 +1,64 @@
+<mujoco model="sausage">
+
+    <option timestep="0.002" />
+
+    <default>
+        <default class="seg">
+            <!-- 3-DOF Gelenk für Wabbeln -->
+            <joint type="ball" stiffness="1" damping="0.1" armature="0.001"/>
+
+            <!-- Wurstsegment-Kapsel -->
+            <geom type="capsule"
+                  size="0.03"
+                  mass="0.2"
+                  solref="0.02 1"
+                  solimp="0.95 0.95 0.01"
+                  friction="0.7 0.3 0.1"
+                  fromto="-0.00 0 0 0.04 0 0"
+                  contype="1"
+                  conaffinity="0"
+            />
+        </default>
+    </default>
+
+    <worldbody>
+        <!-- Die 7 Segmente werden ineinander verschachtelt -->
+        <body name="seg0" pos="-0.14 0 0">
+            <geom class="seg" name="seg0_geom"/>
+            <site name="sausage_site_left" pos="0 0 0"/>
+
+            <body name="seg1" pos="0.04 0 0">
+                <joint class="seg" name="ball_1"/>
+                <geom class="seg" name="seg1_geom"/>
+
+                <body name="seg2" pos="0.04 0 0">
+                    <joint class="seg" name="ball_2"/>
+                    <geom class="seg" name="seg2_geom"/>
+
+                    <body name="seg3" pos="0.04 0 0">
+                        <joint class="seg" name="ball_3"/>
+                        <geom class="seg" name="seg3_geom"/>
+                        <site name="sausage_site_middle" pos="0.02 0 0"/>
+
+                        <body name="seg4" pos="0.04 0 0">
+                            <joint class="seg" name="ball_4"/>
+                            <geom class="seg" name="seg4_geom"/>
+
+                            <body name="seg5" pos="0.04 0 0">
+                                <joint class="seg" name="ball_5"/>
+                                <geom class="seg" name="seg5_geom"/>
+
+                                <body name="seg6" pos="0.04 0 0">
+                                    <joint class="seg" name="ball_6"/>
+                                    <geom class="seg" name="seg6_geom"/>
+                                    <site name="sausage_site_right" pos="0.04 0 0"/>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+</mujoco>
